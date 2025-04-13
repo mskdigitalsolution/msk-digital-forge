@@ -13,7 +13,15 @@ const ServiceCard = ({ title, description, icon: Icon, imageSrc, delay }: Servic
   return (
     <div className={`bg-msk-blue rounded-lg overflow-hidden shadow-lg hover:transform hover:scale-105 transition-all duration-300 opacity-0 animate-${delay}`}>
       <div className="relative h-48">
-        <img src={imageSrc} alt={title} className="w-full h-full object-cover" />
+        <img 
+          src={imageSrc} 
+          alt={title} 
+          className="w-full h-full object-cover" 
+          onError={(e) => {
+            console.error(`Error loading image: ${imageSrc}`);
+            e.currentTarget.src = '/placeholder.svg';
+          }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-msk-dark/90"></div>
         <div className="absolute bottom-0 left-0 p-4">
           <div className="bg-msk-yellow rounded-full p-2 mb-3">

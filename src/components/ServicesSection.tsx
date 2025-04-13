@@ -1,4 +1,3 @@
-
 import ServiceCard from './ServiceCard';
 import { Code, Share2, Search, FileEdit } from 'lucide-react';
 
@@ -60,4 +59,3 @@ const ServicesSection = () => {
 };
 
 export default ServicesSection;
-
