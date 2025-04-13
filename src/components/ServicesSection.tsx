@@ -8,7 +8,7 @@ const ServicesSection = () => {
       title: 'Website Development',
       description: 'Custom, responsive websites built with cutting-edge technologies that deliver exceptional user experiences.',
       icon: Code,
-      imageSrc: '/lovable-uploads/e62dae42-38b9-4d7d-9f8b-63274c21a733.png',
+      imageSrc: '/lovable-uploads/c567b02e-cfd5-420d-840f-2f9f4e01fdb3.png',
       delay: 'fade-in-delay-1'
     },
     {
@@ -60,3 +60,4 @@ const ServicesSection = () => {
 };
 
 export default ServicesSection;
+
