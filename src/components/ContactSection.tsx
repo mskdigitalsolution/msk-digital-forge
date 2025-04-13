@@ -19,18 +19,18 @@ const ContactSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <a 
-              href="mailto:contact@mskdigital.com" 
+              href="mailto:mskdigitalsolution@gmail.com" 
               className="flex flex-col items-center p-6 bg-msk-dark rounded-lg hover:bg-msk-darker transition-colors duration-300 group"
             >
               <div className="p-3 bg-msk-yellow rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
                 <Mail size={24} className="text-msk-dark" />
               </div>
               <h3 className="font-tech font-medium text-white mb-2">EMAIL US</h3>
-              <p className="text-msk-yellow text-center">contact@mskdigital.com</p>
+              <p className="text-msk-yellow text-center">mskdigitalsolution@gmail.com</p>
             </a>
 
             <a 
-              href="https://wa.me/1234567890" 
+              href="https://wa.me/0554039909" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="flex flex-col items-center p-6 bg-msk-dark rounded-lg hover:bg-msk-darker transition-colors duration-300 group"
@@ -39,7 +39,7 @@ const ContactSection = () => {
                 <MessageSquare size={24} className="text-msk-dark" />
               </div>
               <h3 className="font-tech font-medium text-white mb-2">WHATSAPP</h3>
-              <p className="text-msk-yellow text-center">Send a message</p>
+              <p className="text-msk-yellow text-center">+0554039909</p>
             </a>
           </div>
         </div>
