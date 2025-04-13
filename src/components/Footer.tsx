@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <div className="flex items-center gap-2">
-              <img src="/lovable-uploads/6430cc2f-121c-43f3-8d6f-9c9e25ebeae6.png" alt="MSK Digital Solution Logo" className="h-8 w-auto" />
+              <img src="/lovable-uploads/f511c8b3-da1f-460b-89f1-4209b6725f62.png" alt="MSK Digital Solution Logo" className="h-8 w-auto" />
               <span className="text-xl font-tech font-bold text-white">MSK<span className="text-msk-yellow">.</span></span>
               <span className="text-sm font-tech text-msk-yellow">DIGITAL SOLUTION</span>
             </div>
