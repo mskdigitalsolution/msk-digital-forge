@@ -1,9 +1,15 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useAuth } from '@/providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +51,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop menu */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -55,6 +61,23 @@ const Navbar = () => {
                 {link.name.toUpperCase()}
               </a>
             ))}
+            {user ? (
+              <Button
+                onClick={() => signOut()}
+                variant="outline"
+                className="ml-4 border-msk-yellow text-msk-yellow hover:bg-msk-yellow hover:text-black"
+              >
+                Sign Out
+              </Button>
+            ) : (
+              <Button
+                onClick={() => navigate('/auth')}
+                variant="outline"
+                className="ml-4 border-msk-yellow text-msk-yellow hover:bg-msk-yellow hover:text-black"
+              >
+                Sign In
+              </Button>
+            )}
           </nav>
 
           {/* Mobile menu button */}
@@ -83,6 +106,29 @@ const Navbar = () => {
                 {link.name.toUpperCase()}
               </a>
             ))}
+            {user ? (
+              <Button
+                onClick={() => {
+                  signOut();
+                  setIsMenuOpen(false);
+                }}
+                variant="outline"
+                className="w-full mt-2 border-msk-yellow text-msk-yellow hover:bg-msk-yellow hover:text-black"
+              >
+                Sign Out
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  navigate('/auth');
+                  setIsMenuOpen(false);
+                }}
+                variant="outline"
+                className="w-full mt-2 border-msk-yellow text-msk-yellow hover:bg-msk-yellow hover:text-black"
+              >
+                Sign In
+              </Button>
+            )}
           </div>
         </div>
       )}
