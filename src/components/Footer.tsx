@@ -1,5 +1,5 @@
 
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Phone, Mail, Instagram, MessageSquare } from 'lucide-react';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -22,6 +22,20 @@ const Footer = () => {
             <p className="text-gray-400 text-sm mt-2">
               Transforming businesses through digital excellence
             </p>
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center gap-2">
+                <Phone className="w-5 h-5 text-msk-yellow" />
+                <a href="tel:0554039909" className="text-gray-300 hover:text-white">0554039909</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="w-5 h-5 text-msk-yellow" />
+                <a href="mailto:mskdigitalsolution@gmail.com" className="text-gray-300 hover:text-white">mskdigitalsolution@gmail.com</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <Instagram className="w-5 h-5 text-msk-yellow" />
+                <a href="https://www.instagram.com/mskdigitalsolution/#" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">@mskdigitalsolution</a>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col items-center">
