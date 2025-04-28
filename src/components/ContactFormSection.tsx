@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { MessageSquare, Mail, Phone } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactFormSection = () => {
   const [formData, setFormData] = useState({
@@ -14,15 +15,45 @@ const ContactFormSection = () => {
     message: "",
   });
   
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Thanks for reaching out!",
-      description: "We'll get back to you soon.",
-    });
-    setFormData({ name: "", email: "", businessType: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      // Save the form submission to Supabase
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          business_type: formData.businessType,
+          message: formData.message
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Thanks for reaching out!",
+        description: "We've received your message and will get back to you soon.",
+      });
+      
+      // Reset the form after successful submission
+      setFormData({ name: "", email: "", businessType: "", message: "" });
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      toast({
+        title: "Something went wrong",
+        description: "Failed to submit your message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -59,6 +90,7 @@ const ContactFormSection = () => {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
                 placeholder="Your name"
+                disabled={isSubmitting}
               />
             </div>
             
@@ -71,6 +103,7 @@ const ContactFormSection = () => {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
                 placeholder="your@email.com"
+                disabled={isSubmitting}
               />
             </div>
             
@@ -80,8 +113,8 @@ const ContactFormSection = () => {
                 id="businessType"
                 value={formData.businessType}
                 onChange={(e) => setFormData({ ...formData, businessType: e.target.value })}
-                required
                 placeholder="What's your business type?"
+                disabled={isSubmitting}
               />
             </div>
             
@@ -94,10 +127,13 @@ const ContactFormSection = () => {
                 required
                 placeholder="Tell us about your project"
                 rows={4}
+                disabled={isSubmitting}
               />
             </div>
             
-            <Button type="submit" className="w-full">Send Message</Button>
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </Button>
           </form>
         </div>
       </div>
