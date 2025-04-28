@@ -1,44 +1,54 @@
-import { useState } from 'react';
-import { ChevronDown, ZoomIn, ZoomOut } from 'lucide-react';
+
+import { useState, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 const HeroSection = () => {
   const [scale, setScale] = useState(1);
-
-  const handleZoomIn = () => {
-    setScale(prev => Math.min(prev + 0.1, 1.5));
-  };
-
-  const handleZoomOut = () => {
-    setScale(prev => Math.max(prev - 0.1, 0.8));
-  };
+  
+  // Automatic zoom effect
+  useEffect(() => {
+    // Start slightly zoomed out and slowly zoom in
+    let animationFrameId: number;
+    let direction = 1; // 1 for zoom in, -1 for zoom out
+    let currentScale = 1;
+    const minScale = 1;
+    const maxScale = 1.15;
+    const zoomSpeed = 0.0005; // Slower speed for subtle effect
+    
+    const animateZoom = () => {
+      // Update scale based on direction
+      currentScale += zoomSpeed * direction;
+      
+      // Change direction when reaching limits
+      if (currentScale >= maxScale) {
+        direction = -1;
+      } else if (currentScale <= minScale) {
+        direction = 1;
+      }
+      
+      setScale(currentScale);
+      animationFrameId = requestAnimationFrame(animateZoom);
+    };
+    
+    animationFrameId = requestAnimationFrame(animateZoom);
+    
+    // Clean up animation on component unmount
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with zoom effect */}
+      {/* Background Image with automatic zoom effect */}
       <div className="absolute inset-0 z-0">
         <img
           src="/lovable-uploads/6430cc2f-121c-43f3-8d6f-9c9e25ebeae6.png"
           alt="Futuristic city with yellow lights"
-          className="w-full h-full object-cover transition-transform duration-300 ease-in-out"
+          className="w-full h-full object-cover transition-transform duration-700 ease-in-out"
           style={{ transform: `scale(${scale})` }}
         />
         <div className="absolute inset-0 bg-msk-dark/60"></div>
-      </div>
-
-      {/* Zoom controls */}
-      <div className="absolute top-4 right-4 flex gap-2 z-20">
-        <button
-          onClick={handleZoomIn}
-          className="p-2 bg-msk-dark/80 rounded-full hover:bg-msk-yellow/80 transition-colors group"
-        >
-          <ZoomIn className="w-5 h-5 text-msk-yellow group-hover:text-msk-dark" />
-        </button>
-        <button
-          onClick={handleZoomOut}
-          className="p-2 bg-msk-dark/80 rounded-full hover:bg-msk-yellow/80 transition-colors group"
-        >
-          <ZoomOut className="w-5 h-5 text-msk-yellow group-hover:text-msk-dark" />
-        </button>
       </div>
 
       {/* Content */}
