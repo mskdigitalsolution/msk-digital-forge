@@ -6,10 +6,11 @@ import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import PortfolioSection from '@/components/PortfolioSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import FeedbackFormSection from '@/components/FeedbackFormSection';
 import FAQSection from '@/components/FAQSection';
 import ContactFormSection from '@/components/ContactFormSection';
 import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   return (
@@ -20,7 +21,24 @@ const Index = () => {
       <ServicesSection />
       <PortfolioSection />
       <TestimonialsSection />
-      <FeedbackFormSection />
+      
+      {/* Feedback CTA Section */}
+      <section className="py-12 bg-gradient-to-r from-msk-dark to-msk-darker">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-tech font-bold uppercase tracking-wider text-white mb-4">
+            Share Your Experience
+          </h2>
+          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+            We'd love to hear your feedback! Help us improve our services by sharing your thoughts.
+          </p>
+          <Link to="/feedback">
+            <Button className="bg-msk-yellow hover:bg-msk-yellow/90 text-black">
+              Leave Feedback
+            </Button>
+          </Link>
+        </div>
+      </section>
+      
       <FAQSection />
       <ContactFormSection />
       <Footer />

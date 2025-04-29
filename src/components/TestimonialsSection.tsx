@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { User, Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 interface Testimonial {
   id: string;
@@ -76,33 +78,45 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section id="testimonials" className="py-16 bg-msk-darker">
+    <section id="testimonials" className="py-16 bg-gray-100">
       <div className="container mx-auto px-4">
-        <h2 className="section-title">Client Testimonials</h2>
-        <p className="section-subtitle">What Our Clients Say</p>
+        <h2 className="section-title text-center">Client Testimonials</h2>
+        <p className="section-subtitle text-center">What Our Clients Say</p>
         
         {isLoading ? (
           <div className="flex justify-center items-center h-40">
             <p>Loading testimonials...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {displayedTestimonials.map((testimonial) => (
-              <Card key={testimonial.id} className="gradient-border">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <User className="w-12 h-12 text-msk-yellow mr-4" />
-                    <div>
-                      <h3 className="font-semibold">{testimonial.name}</h3>
-                      <p className="text-sm text-muted-foreground">{testimonial.project_name || ""}</p>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {displayedTestimonials.map((testimonial) => (
+                <Card key={testimonial.id} className="gradient-border bg-white">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="bg-msk-dark rounded-full p-2 mr-4">
+                        <User className="w-8 h-8 text-msk-yellow" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold">{testimonial.name}</h3>
+                        <p className="text-sm text-muted-foreground">{testimonial.project_name || ""}</p>
+                      </div>
                     </div>
-                  </div>
-                  {renderStars(testimonial.rating)}
-                  <p className="text-muted-foreground">{testimonial.feedback}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    {renderStars(testimonial.rating)}
+                    <p className="text-muted-foreground">{testimonial.feedback}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            <div className="mt-12 text-center">
+              <Link to="/feedback">
+                <Button className="bg-msk-yellow hover:bg-msk-yellow/90 text-black">
+                  Share Your Feedback
+                </Button>
+              </Link>
+            </div>
+          </>
         )}
       </div>
     </section>
