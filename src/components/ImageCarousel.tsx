@@ -30,7 +30,7 @@ const images = [
 ];
 
 const ImageCarousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 30 });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const onSelect = useCallback(() => {
@@ -41,49 +41,71 @@ const ImageCarousel = () => {
   // Auto-slide effect
   useEffect(() => {
     if (!emblaApi) return;
-
+    
+    // When the embla API is available, set up the select handler
+    emblaApi.on("select", onSelect);
+    
+    // Initial call to set the current index
+    onSelect();
+    
+    // Set up auto-slide functionality
     const intervalId = setInterval(() => {
-      if (emblaApi.canScrollNext()) {
+      if (emblaApi && emblaApi.canScrollNext()) {
         emblaApi.scrollNext();
       }
     }, 5000); // Change image every 5 seconds
 
-    // Set up the event listeners
-    emblaApi.on('select', onSelect);
-
-    // Initial call to set the current index
-    onSelect();
-
     return () => {
       clearInterval(intervalId);
-      emblaApi?.off('select', onSelect);
+      if (emblaApi) {
+        emblaApi.off("select", onSelect);
+      }
     };
   }, [emblaApi, onSelect]);
 
   return (
-    <Carousel
-      className="w-full h-full"
-      opts={{ loop: true, align: "center" }}
-    >
-      <CarouselContent className="h-full" ref={emblaRef}>
-        {images.map((image, index) => (
-          <CarouselItem key={index} className="h-full">
-            <div className="relative h-full w-full">
+    <div className="w-full h-full relative">
+      <div className="overflow-hidden h-full" ref={emblaRef}>
+        <div className="flex h-full">
+          {images.map((image, index) => (
+            <div 
+              key={index} 
+              className="relative flex-[0_0_100%] h-full min-w-0"
+            >
               <img
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-msk-dark/40"></div>
             </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="left-4 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow" />
-      <CarouselNext className="right-4 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow" />
+          ))}
+        </div>
+      </div>
+      
+      {/* Navigation buttons */}
+      <button 
+        onClick={() => emblaApi?.scrollPrev()}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow rounded-full h-8 w-8 flex items-center justify-center z-10"
+        aria-label="Previous slide"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </button>
+      
+      <button 
+        onClick={() => emblaApi?.scrollNext()}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow rounded-full h-8 w-8 flex items-center justify-center z-10"
+        aria-label="Next slide"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </button>
       
       {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
         {images.map((_, index) => (
           <button
             key={index}
@@ -95,7 +117,7 @@ const ImageCarousel = () => {
           />
         ))}
       </div>
-    </Carousel>
+    </div>
   );
 };
 
