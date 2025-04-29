@@ -36,6 +36,45 @@ export type Database = {
         }
         Relationships: []
       }
+      testimonials: {
+        Row: {
+          allow_sharing: boolean
+          approved: boolean
+          created_at: string
+          email: string | null
+          feedback: string
+          id: string
+          name: string
+          phone: string | null
+          project_name: string | null
+          rating: number
+        }
+        Insert: {
+          allow_sharing?: boolean
+          approved?: boolean
+          created_at?: string
+          email?: string | null
+          feedback: string
+          id?: string
+          name: string
+          phone?: string | null
+          project_name?: string | null
+          rating: number
+        }
+        Update: {
+          allow_sharing?: boolean
+          approved?: boolean
+          created_at?: string
+          email?: string | null
+          feedback?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          project_name?: string | null
+          rating?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
