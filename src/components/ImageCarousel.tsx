@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import useEmblaCarousel from 'embla-carousel-react';
+import type { EmblaCarouselType } from 'embla-carousel';
 
 const images = [
   {
@@ -29,37 +30,42 @@ const images = [
 ];
 
 const ImageCarousel = () => {
-  const [api] = useEmblaCarousel({ loop: true, duration: 30 });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 30 });
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCurrentIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
   // Auto-slide effect
   useEffect(() => {
-    if (!api) return;
+    if (!emblaApi) return;
 
     const intervalId = setInterval(() => {
-      api.scrollNext();
+      if (emblaApi.canScrollNext()) {
+        emblaApi.scrollNext();
+      }
     }, 5000); // Change image every 5 seconds
 
-    // Update the current index whenever the carousel slides
-    const onSelect = () => {
-      setCurrentIndex(api.selectedScrollSnap());
-    };
-    
-    api.on('select', onSelect);
+    // Set up the event listeners
+    emblaApi.on('select', onSelect);
+
+    // Initial call to set the current index
+    onSelect();
 
     return () => {
       clearInterval(intervalId);
-      api?.off('select', onSelect);
+      emblaApi?.off('select', onSelect);
     };
-  }, [api]);
+  }, [emblaApi, onSelect]);
 
   return (
     <Carousel
       className="w-full h-full"
       opts={{ loop: true, align: "center" }}
-      setApi={api}
     >
-      <CarouselContent className="h-full">
+      <CarouselContent className="h-full" ref={emblaRef}>
         {images.map((image, index) => (
           <CarouselItem key={index} className="h-full">
             <div className="relative h-full w-full">
@@ -84,7 +90,7 @@ const ImageCarousel = () => {
             className={`w-2 h-2 rounded-full transition-colors ${
               currentIndex === index ? "bg-msk-yellow" : "bg-white/50"
             }`}
-            onClick={() => api?.scrollTo(index)}
+            onClick={() => emblaApi?.scrollTo(index)}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
