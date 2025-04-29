@@ -1,54 +1,13 @@
 
-import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import ImageCarousel from './ImageCarousel';
 
 const HeroSection = () => {
-  const [scale, setScale] = useState(1);
-  
-  // Automatic zoom effect
-  useEffect(() => {
-    // Start slightly zoomed out and slowly zoom in
-    let animationFrameId: number;
-    let direction = 1; // 1 for zoom in, -1 for zoom out
-    let currentScale = 1;
-    const minScale = 1;
-    const maxScale = 1.15;
-    const zoomSpeed = 0.0005; // Slower speed for subtle effect
-    
-    const animateZoom = () => {
-      // Update scale based on direction
-      currentScale += zoomSpeed * direction;
-      
-      // Change direction when reaching limits
-      if (currentScale >= maxScale) {
-        direction = -1;
-      } else if (currentScale <= minScale) {
-        direction = 1;
-      }
-      
-      setScale(currentScale);
-      animationFrameId = requestAnimationFrame(animateZoom);
-    };
-    
-    animationFrameId = requestAnimationFrame(animateZoom);
-    
-    // Clean up animation on component unmount
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with automatic zoom effect */}
+      {/* Background using ImageCarousel */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/lovable-uploads/6430cc2f-121c-43f3-8d6f-9c9e25ebeae6.png"
-          alt="Futuristic city with yellow lights"
-          className="w-full h-full object-cover transition-transform duration-700 ease-in-out"
-          style={{ transform: `scale(${scale})` }}
-        />
-        <div className="absolute inset-0 bg-msk-dark/60"></div>
+        <ImageCarousel />
       </div>
 
       {/* Content */}
