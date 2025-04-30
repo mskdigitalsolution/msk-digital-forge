@@ -96,7 +96,7 @@ const FeedbackForm = () => {
   };
   
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8">
+    <div className="bg-gradient-to-br from-[#222233] to-[#1A1F2C] rounded-lg shadow-xl p-8 border border-[#7E69AB]/20 backdrop-blur-sm relative z-10 animate-fade-in">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -104,9 +104,14 @@ const FeedbackForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name*</FormLabel>
+                <FormLabel className="text-[#D6BCFA] font-medium">Name*</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your name" {...field} disabled={isSubmitting} />
+                  <Input 
+                    placeholder="Your name" 
+                    {...field} 
+                    disabled={isSubmitting} 
+                    className="border-[#7E69AB]/30 bg-[#1A1F2C]/50 focus:border-[#9b87f5] transition-all"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -119,9 +124,15 @@ const FeedbackForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email (Optional)</FormLabel>
+                  <FormLabel className="text-[#D6BCFA] font-medium">Email (Optional)</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="your@email.com" {...field} disabled={isSubmitting} />
+                    <Input 
+                      type="email" 
+                      placeholder="your@email.com" 
+                      {...field} 
+                      disabled={isSubmitting} 
+                      className="border-[#7E69AB]/30 bg-[#1A1F2C]/50 focus:border-[#9b87f5] transition-all"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,9 +144,14 @@ const FeedbackForm = () => {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone (Optional)</FormLabel>
+                  <FormLabel className="text-[#D6BCFA] font-medium">Phone (Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your phone number" {...field} disabled={isSubmitting} />
+                    <Input 
+                      placeholder="Your phone number" 
+                      {...field} 
+                      disabled={isSubmitting} 
+                      className="border-[#7E69AB]/30 bg-[#1A1F2C]/50 focus:border-[#9b87f5] transition-all"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -148,12 +164,13 @@ const FeedbackForm = () => {
             name="projectName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Project Name / Service Taken (Optional)</FormLabel>
+                <FormLabel className="text-[#D6BCFA] font-medium">Project Name / Service Taken (Optional)</FormLabel>
                 <FormControl>
                   <Input 
                     placeholder="Website Development, Social Media Management, etc." 
                     {...field} 
                     disabled={isSubmitting} 
+                    className="border-[#7E69AB]/30 bg-[#1A1F2C]/50 focus:border-[#9b87f5] transition-all"
                   />
                 </FormControl>
                 <FormMessage />
@@ -166,20 +183,20 @@ const FeedbackForm = () => {
             name="rating"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Overall Satisfaction*</FormLabel>
+                <FormLabel className="text-[#D6BCFA] font-medium">Overall Satisfaction*</FormLabel>
                 <FormControl>
                   <div className="flex items-center gap-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"
-                        className="focus:outline-none"
+                        className="focus:outline-none transition-transform hover:scale-110"
                         onClick={() => form.setValue("rating", star)}
                       >
                         <Star
-                          className={`h-8 w-8 ${
+                          className={`h-8 w-8 transition-all ${
                             field.value >= star
-                              ? "text-msk-yellow fill-msk-yellow"
+                              ? "text-[#9b87f5] fill-[#9b87f5]"
                               : "text-gray-400"
                           }`}
                         />
@@ -197,13 +214,14 @@ const FeedbackForm = () => {
             name="feedback"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Feedback / Testimonial*</FormLabel>
+                <FormLabel className="text-[#D6BCFA] font-medium">Feedback / Testimonial*</FormLabel>
                 <FormControl>
                   <Textarea 
                     placeholder="How was your experience with us?" 
                     rows={4} 
                     {...field} 
                     disabled={isSubmitting} 
+                    className="border-[#7E69AB]/30 bg-[#1A1F2C]/50 focus:border-[#9b87f5] transition-all resize-none"
                   />
                 </FormControl>
                 <FormMessage />
@@ -220,10 +238,11 @@ const FeedbackForm = () => {
                   <Checkbox 
                     checked={field.value} 
                     onCheckedChange={field.onChange} 
+                    className="border-[#7E69AB] data-[state=checked]:bg-[#9b87f5] data-[state=checked]:border-[#9b87f5]"
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel className="text-sm">
+                  <FormLabel className="text-sm text-[#8E9196]">
                     I allow MSK Digital Solution to share my feedback on their website or social media.
                   </FormLabel>
                 </div>
@@ -233,7 +252,7 @@ const FeedbackForm = () => {
           
           <Button
             type="submit"
-            className="w-full"
+            className="w-full bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:opacity-90 transition-opacity text-white font-medium"
             disabled={isSubmitting || form.getValues("rating") === 0}
           >
             {isSubmitting ? "Submitting..." : "Submit Feedback"}
