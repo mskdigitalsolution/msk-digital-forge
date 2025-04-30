@@ -1,11 +1,12 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import { ArrowLeft } from "lucide-react";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
@@ -61,6 +62,16 @@ export default function Auth() {
           <div className="h-px w-1/4 bg-gradient-to-r from-transparent via-msk-yellow to-transparent absolute top-[35%] right-[10%]"></div>
           <div className="h-px w-1/5 bg-gradient-to-r from-transparent via-msk-yellow to-transparent absolute bottom-[15%] left-[15%]"></div>
         </div>
+      </div>
+      
+      {/* Back button */}
+      <div className="absolute top-6 left-6 z-20">
+        <Link to="/">
+          <Button variant="outline" className="flex items-center gap-2 text-white/80 border-msk-blue/30 hover:bg-msk-blue/20 hover:text-white transition-colors">
+            <ArrowLeft size={16} />
+            Back to Home
+          </Button>
+        </Link>
       </div>
       
       {/* Left side tech image */}
