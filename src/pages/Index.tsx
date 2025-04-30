@@ -23,16 +23,16 @@ const Index = () => {
       <TestimonialsSection />
       
       {/* Feedback CTA Section */}
-      <section className="py-12 bg-gradient-to-r from-msk-dark to-msk-darker">
+      <section className="py-12 bg-gradient-to-r from-[#1A1F2C] to-[#0F172A]">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-tech font-bold uppercase tracking-wider text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-tech font-bold uppercase tracking-wider text-transparent bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA] bg-clip-text mb-4">
             Share Your Experience
           </h2>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-[#8E9196] mb-8 max-w-2xl mx-auto">
             We'd love to hear your feedback! Help us improve our services by sharing your thoughts.
           </p>
           <Link to="/feedback">
-            <Button className="bg-msk-yellow hover:bg-msk-yellow/90 text-black">
+            <Button className="bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:opacity-90 transition-opacity text-white font-medium">
               Leave Feedback
             </Button>
           </Link>
