@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { MessageSquare, Mail, Phone } from "lucide-react";
+import { MessageSquare, Mail, Phone, Instagram } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const ContactFormSection = () => {
@@ -80,19 +80,19 @@ const ContactFormSection = () => {
                 <div className="p-3 bg-msk-yellow/20 rounded-full">
                   <Phone className="w-6 h-6 text-msk-yellow" />
                 </div>
-                <p className="text-white/80">+1 (555) 123-4567</p>
+                <p className="text-white/80">0554039909</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-msk-yellow/20 rounded-full">
                   <Mail className="w-6 h-6 text-msk-yellow" />
                 </div>
-                <p className="text-white/80">contact@mskdigital.com</p>
+                <p className="text-white/80">mskdigitalsolution@gmail.com</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-msk-yellow/20 rounded-full">
-                  <MessageSquare className="w-6 h-6 text-msk-yellow" />
+                  <Instagram className="w-6 h-6 text-msk-yellow" />
                 </div>
-                <p className="text-white/80">WhatsApp: +1 (555) 123-4567</p>
+                <p className="text-white/80">@mskdigitalsolution</p>
               </div>
             </div>
           </div>
