@@ -1,4 +1,3 @@
-
 import ServiceCard from './ServiceCard';
 import { Code, Share2, Search, FileEdit } from 'lucide-react';
 
@@ -15,7 +14,7 @@ const ServicesSection = () => {
       title: 'Social Media Management',
       description: 'Strategic social media campaigns that build brand awareness and engage your target audience effectively.',
       icon: Share2,
-      imageSrc: '/lovable-uploads/cf6e5124-566e-44ee-a508-78b255736cf7.png',
+      imageSrc: '/lovable-uploads/d32d98fe-01b5-48e0-8d23-9ff52796c7cb.png',
       delay: 'fade-in-delay-2'
     },
     {
