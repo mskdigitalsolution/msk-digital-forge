@@ -1,3 +1,4 @@
+
 import ServiceCard from './ServiceCard';
 import { Code, Share2, Search, FileEdit } from 'lucide-react';
 
@@ -28,7 +29,7 @@ const ServicesSection = () => {
       title: 'Content Creation',
       description: 'Engaging, high-quality content that tells your brand story and connects with your audience across platforms.',
       icon: FileEdit,
-      imageSrc: '/lovable-uploads/208f8c21-ccc3-4524-aa59-393d6ec99b44.png',
+      imageSrc: '/lovable-uploads/1408c018-c65f-44af-a160-715c7929a293.png',
       delay: 'fade-in-delay-3'
     }
   ];
