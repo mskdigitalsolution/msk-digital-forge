@@ -21,7 +21,7 @@ const ServicesSection = () => {
       title: 'SEO Optimization',
       description: 'Data-driven SEO strategies to improve your search engine rankings and drive organic traffic to your business.',
       icon: Search,
-      imageSrc: '/lovable-uploads/3d9b3e38-3fff-4fc6-8bce-42745bc8abb9.png',
+      imageSrc: '/lovable-uploads/f5b4b59f-3e1e-48d6-9e2c-450b14c9a979.png',
       delay: 'fade-in-delay-2'
     },
     {
