@@ -7,17 +7,17 @@ const PortfolioSection = () => {
     {
       title: "E-commerce Website",
       description: "A modern online store built with React",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop",
     },
     {
       title: "Business Landing Page",
       description: "Clean and professional business website",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop",
     },
     {
       title: "Social Media Campaign",
       description: "Engaging social media content design",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop",
     },
   ];
 
@@ -30,8 +30,12 @@ const PortfolioSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {portfolioItems.map((item, index) => (
             <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="relative h-48 bg-msk-blue/10">
-                <Image className="w-12 h-12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-msk-yellow/50" />
+              <div className="relative h-48 bg-msk-blue/10 overflow-hidden">
+                <img 
+                  src={item.image} 
+                  alt={item.title}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
               <CardContent className="p-4">
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
