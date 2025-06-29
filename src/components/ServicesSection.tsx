@@ -1,3 +1,4 @@
+
 import ServiceCard from './ServiceCard';
 import { Code, Share2, Search, FileEdit } from 'lucide-react';
 
@@ -7,7 +8,7 @@ const ServicesSection = () => {
       title: 'Website Development',
       description: 'Custom, responsive websites built with cutting-edge technologies that deliver exceptional user experiences.',
       icon: Code,
-      imageSrc: '/lovable-uploads/c567b02e-cfd5-420d-840f-2f9f4e01fdb3.png',
+      imageSrc: '/lovable-uploads/b03aa72b-6052-4af8-bdaa-d1db6168f6ed.png',
       delay: 'fade-in-delay-1'
     },
     {
