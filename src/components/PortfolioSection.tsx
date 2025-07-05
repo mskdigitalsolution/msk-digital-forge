@@ -1,23 +1,22 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Image } from "lucide-react";
 
 const PortfolioSection = () => {
   const portfolioItems = [
     {
       title: "E-commerce Website",
       description: "A modern online store built with React",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop",
+      image: "/lovable-uploads/b03aa72b-6052-4af8-bdaa-d1db6168f6ed.png",
     },
     {
       title: "Business Landing Page",
       description: "Clean and professional business website",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop",
+      image: "/lovable-uploads/d32d98fe-01b5-48e0-8d23-9ff52796c7cb.png",
     },
     {
       title: "Social Media Campaign",
       description: "Engaging social media content design",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop",
+      image: "/lovable-uploads/f5b4b59f-3e1e-48d6-9e2c-450b14c9a979.png",
     },
   ];
 
@@ -35,6 +34,7 @@ const PortfolioSection = () => {
                   src={item.image} 
                   alt={item.title}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
               <CardContent className="p-4">
