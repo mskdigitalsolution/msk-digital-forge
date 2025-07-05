@@ -38,7 +38,18 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-b from-[#1A1F2C] to-[#0F172A] text-foreground;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    @apply bg-gradient-to-b from-[#1A1F2C] to-[#0F172A];
+  }
+  
+  #root {
+    @apply bg-gradient-to-b from-[#1A1F2C] to-[#0F172A];
+    min-height: 100vh;
   }
 }
 
