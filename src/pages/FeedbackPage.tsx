@@ -6,12 +6,12 @@ import Footer from '@/components/Footer';
 
 const FeedbackPage = () => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#1A1F2C] to-[#0F172A]">
+    <div className="min-h-screen bg-gradient-to-b from-[#1A1F2C] to-[#0F172A]">
       <Navbar />
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-tech font-bold tracking-wide text-transparent bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA] bg-clip-text mb-3">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-wide text-transparent bg-gradient-to-r from-[#9b87f5] to-[#D6BCFA] bg-clip-text mb-3">
               Share Your Feedback
             </h1>
             <p className="text-xl text-[#8E9196] max-w-2xl mx-auto">
