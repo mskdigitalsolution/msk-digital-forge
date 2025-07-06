@@ -1,12 +1,5 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import useEmblaCarousel from 'embla-carousel-react';
 import type { UseEmblaCarouselType } from 'embla-carousel-react';
 
@@ -32,6 +25,14 @@ const images = [
 const ImageCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [firstImageLoaded, setFirstImageLoaded] = useState(false);
+
+  // Preload first image immediately
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setFirstImageLoaded(true);
+    img.src = images[0].src;
+  }, []);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -42,18 +43,14 @@ const ImageCarousel = () => {
   useEffect(() => {
     if (!emblaApi) return;
     
-    // When the embla API is available, set up the select handler
     emblaApi.on("select", onSelect);
-    
-    // Initial call to set the current index
     onSelect();
     
-    // Set up auto-slide functionality
     const intervalId = setInterval(() => {
       if (emblaApi && emblaApi.canScrollNext()) {
         emblaApi.scrollNext();
       }
-    }, 5000); // Change image every 5 seconds
+    }, 5000);
 
     return () => {
       clearInterval(intervalId);
@@ -65,7 +62,20 @@ const ImageCarousel = () => {
 
   return (
     <div className="w-full h-full relative">
-      <div className="overflow-hidden h-full" ref={emblaRef}>
+      {/* Show first image immediately when loaded */}
+      {firstImageLoaded && (
+        <div className="absolute inset-0 z-0">
+          <img
+            src={images[0].src}
+            alt={images[0].alt}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-msk-dark/40"></div>
+        </div>
+      )}
+      
+      {/* Carousel overlay */}
+      <div className="overflow-hidden h-full relative z-10" ref={emblaRef}>
         <div className="flex h-full">
           {images.map((image, index) => (
             <div 
@@ -76,6 +86,7 @@ const ImageCarousel = () => {
                 src={image.src}
                 alt={image.alt}
                 className="w-full h-full object-cover"
+                loading={index === 0 ? "eager" : "lazy"}
               />
               <div className="absolute inset-0 bg-msk-dark/40"></div>
             </div>
@@ -86,7 +97,7 @@ const ImageCarousel = () => {
       {/* Navigation buttons */}
       <button 
         onClick={() => emblaApi?.scrollPrev()}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow rounded-full h-8 w-8 flex items-center justify-center z-10"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow rounded-full h-8 w-8 flex items-center justify-center z-20"
         aria-label="Previous slide"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -96,7 +107,7 @@ const ImageCarousel = () => {
       
       <button 
         onClick={() => emblaApi?.scrollNext()}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow rounded-full h-8 w-8 flex items-center justify-center z-10"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-msk-dark/30 hover:bg-msk-dark/60 text-white border-msk-yellow rounded-full h-8 w-8 flex items-center justify-center z-20"
         aria-label="Next slide"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -105,7 +116,7 @@ const ImageCarousel = () => {
       </button>
       
       {/* Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
         {images.map((_, index) => (
           <button
             key={index}
